@@ -27,7 +27,7 @@ A redução de ruído operacional é essencial para a eficiência do SOC. Evento
 Foram analisados os logs do período das 18h às 22h. A consulta abaixo foi utilizada para validar a redução observada:
 
 \`\`\`spl
-index="assai_fortigate" sourcetype=fortigate_traffic
+index="example_fortigate" sourcetype=fortigate_traffic
 | timechart span=15m count
 \`\`\`
 

@@ -4,6 +4,8 @@ Adiciona comentários ancorados a qualquer trecho de texto (uma palavra, frase o
 parágrafo), com **destaque colorido + sublinhado** ligados ao tema, e um
 **painel lateral** com ordenação.
 
+![Documento com trechos comentados e o painel lateral de comentários](docs/images/overview.png)
+
 ## Funcionalidades
 
 - **Comentar via botão direito**: selecione um trecho → menu de contexto →
@@ -21,6 +23,28 @@ parágrafo), com **destaque colorido + sublinhado** ligados ao tema, e um
   espelhando o caminho de origem e com backlink `[[documento]]`. A nota é
   legível (callouts) e tem um bloco `%% ... %%` oculto com o JSON, que é a fonte
   da verdade.
+
+## Capturas de tela
+
+**Painel com histórico** — cada comentário guarda a trilha `criado → editado →
+concluído`; os concluídos aparecem riscados.
+
+![Painel de comentários com a trilha de histórico](docs/images/panel.png)
+
+**Filtrar concluídos** — o ícone de olho esconde os comentários já resolvidos,
+deixando só os pendentes.
+
+![Painel filtrando apenas os comentários pendentes](docs/images/filter.png)
+
+**Ordenação** — por posição no documento ou por data (mais antigos / mais
+recentes).
+
+![Menu de ordenação do painel](docs/images/sort.png)
+
+**Configurável** — pasta das notas, tamanho do contexto da âncora, ordenação
+padrão e as cores de realce (pendente / concluído).
+
+![Tela de configurações do plugin](docs/images/settings.png)
 
 ## Como a âncora funciona
 

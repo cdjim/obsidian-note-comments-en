@@ -1,0 +1,186 @@
+/* Destaque do trecho comentado — fundo + sublinhado, ligados ao tema. */
+.text-comment-highlight {
+  background-color: var(--text-highlight-bg);
+  border-bottom: 2px solid var(--text-accent);
+  border-radius: 2px;
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+
+/* Cor personalizada (pendente ou concluído): aplicada de forma translúcida
+   para permanecer legível em qualquer tema. */
+.text-comment-highlight[style*="--tc-color"] {
+  background-color: color-mix(in srgb, var(--tc-color) 35%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--tc-color) 70%, transparent);
+}
+
+/* Concluído: sublinhado pontilhado e mais discreto, para facilitar a leitura. */
+.text-comment-highlight.is-done {
+  border-bottom-style: dotted;
+}
+
+/* Ícone clicável (widget) ao fim do trecho comentado, no editor. */
+.text-comment-widget {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: text-bottom;
+  margin: 0 1px 0 2px;
+  cursor: pointer;
+  color: var(--text-accent);
+  opacity: 0.65;
+  transition: opacity 0.1s ease;
+}
+
+.text-comment-widget:hover {
+  opacity: 1;
+}
+
+.text-comment-widget.is-done {
+  color: var(--text-muted);
+}
+
+.text-comment-widget svg {
+  width: 0.85em;
+  height: 0.85em;
+}
+
+/* Flash ao navegar até o trecho pelo painel (modo leitura). */
+.text-comment-flash {
+  animation: text-comment-flash 1.2s ease-out;
+}
+
+@keyframes text-comment-flash {
+  0%,
+  40% {
+    box-shadow: 0 0 0 3px var(--interactive-accent);
+    background-color: var(--text-selection);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* ---- Painel lateral ---- */
+.note-comments-panel {
+  padding: 8px;
+}
+
+.note-comments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.note-comments-title {
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-comments-empty {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  padding: 12px 4px;
+}
+
+.note-comments-counts {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  margin-bottom: 8px;
+}
+
+.text-comment-meta {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  margin-top: 6px;
+}
+
+.note-comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.text-comment-card {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: 8px 10px;
+  background: var(--background-secondary);
+  cursor: pointer;
+  transition: border-color 0.1s ease;
+}
+
+.text-comment-card:hover {
+  border-color: var(--interactive-accent);
+}
+
+.text-comment-card.is-orphan {
+  opacity: 0.55;
+  border-style: dashed;
+}
+
+.text-comment-card.is-done {
+  opacity: 0.7;
+}
+
+.text-comment-card.is-done .text-comment-body {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-faint);
+}
+
+/* Flash ao revelar um cartão (clicando no realce do documento). */
+.text-comment-card.is-flash {
+  animation: text-comment-card-flash 1.2s ease-out;
+}
+
+@keyframes text-comment-card-flash {
+  0%,
+  40% {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 2px var(--interactive-accent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.text-comment-quote {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  border-left: 3px solid var(--text-accent);
+  padding-left: 6px;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text-comment-body {
+  font-size: var(--font-ui-small);
+  white-space: pre-wrap;
+}
+
+.text-comment-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+/* ---- Modal ---- */
+.text-comment-input {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.text-comment-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}

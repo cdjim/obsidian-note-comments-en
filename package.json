@@ -1,0 +1,22 @@
+{
+  "name": "obsidian-note-comments",
+  "version": "0.1.0",
+  "description": "Comentários ancorados a trechos de texto, com destaque e painel lateral.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
+  },
+  "keywords": ["obsidian", "plugin", "comments", "annotations"],
+  "author": "R2 Security",
+  "license": "MIT",
+  "devDependencies": {
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/view": "^6.26.3",
+    "@types/node": "^20.11.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.2",
+    "obsidian": "latest",
+    "typescript": "^5.4.5"
+  }
+}

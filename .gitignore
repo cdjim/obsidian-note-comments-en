@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Build output (gerado por esbuild; anexado nas releases, não versionado)
+main.js
+*.js.map
+
+# Dados de runtime do plugin (por vault)
+data.json
+
+# Config local da máquina (Claude Code / permissões locais)
+.claude/settings.local.json
+
+# Sistema operacional
+.DS_Store

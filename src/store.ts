@@ -38,7 +38,7 @@ export class CommentStore {
     const existing = this.app.vault.getAbstractFileByPath(path);
 
     if (comments.length === 0) {
-      if (existing instanceof TFile) await this.app.vault.delete(existing);
+      if (existing instanceof TFile) await this.app.fileManager.trashFile(existing);
       return;
     }
 
@@ -71,8 +71,8 @@ function parse(content: string): TextComment[] {
   const end = after.indexOf("%%");
   const json = (end === -1 ? after : after.slice(0, end)).trim();
   try {
-    const arr = JSON.parse(json);
-    return Array.isArray(arr) ? arr : [];
+    const arr: unknown = JSON.parse(json);
+    return Array.isArray(arr) ? (arr as TextComment[]) : [];
   } catch {
     return [];
   }

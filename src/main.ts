@@ -93,7 +93,7 @@ export default class TextCommentsPlugin extends Plugin {
       id: "add-comment",
       name: "Adicionar comentário ao trecho selecionado",
       editorCallback: (editor, view) => {
-        if (view instanceof MarkdownView) this.addComment(editor, view);
+        if (view instanceof MarkdownView) void this.addComment(editor, view);
       },
     });
     this.addCommand({
@@ -110,7 +110,7 @@ export default class TextCommentsPlugin extends Plugin {
         // mantém o documento atual visível e editável.
         if (leaf && leaf.view instanceof MarkdownView) {
           this.activeMarkdownView = leaf.view;
-          this.refreshActive();
+          void this.refreshActive();
         }
       })
     );
@@ -119,13 +119,13 @@ export default class TextCommentsPlugin extends Plugin {
         const view = this.app.workspace.getActiveViewOfType(MarkdownView);
         if (view) {
           this.activeMarkdownView = view;
-          this.refreshActive();
+          void this.refreshActive();
         }
       })
     );
 
     // 7. Cliques: no widget (ícone) abre o menu; no trecho realçado, revela no painel.
-    this.registerDomEvent(document, "click", (evt) => {
+    this.registerDomEvent(activeDocument, "click", (evt) => {
       const target = evt.target as HTMLElement | null;
 
       const widget = target?.closest?.(
@@ -150,7 +150,7 @@ export default class TextCommentsPlugin extends Plugin {
     this.app.workspace.onLayoutReady(() => {
       this.activeMarkdownView =
         this.app.workspace.getActiveViewOfType(MarkdownView);
-      this.refreshActive();
+      void this.refreshActive();
     });
   }
 
@@ -325,9 +325,9 @@ export default class TextCommentsPlugin extends Plugin {
 
   /** Centraliza no destaque se ele já existir na DOM. Retorna true se achou. */
   private tryCenterHighlight(view: MarkdownView, id: string): boolean {
-    const el = view.contentEl.querySelector(
+    const el = view.contentEl.querySelector<HTMLElement>(
       `.text-comment-highlight[data-comment-id="${id}"]`
-    ) as HTMLElement | null;
+    );
     if (!el) return false;
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     flashElement(el);
@@ -400,7 +400,7 @@ export default class TextCommentsPlugin extends Plugin {
       leaf = workspace.getRightLeaf(false);
       await leaf?.setViewState({ type: VIEW_TYPE_COMMENTS, active: true });
     }
-    if (leaf) workspace.revealLeaf(leaf);
+    if (leaf) await workspace.revealLeaf(leaf);
   }
 
   /** Abre o painel (se preciso) e destaca o cartão do comentário clicado. */
@@ -456,7 +456,8 @@ export default class TextCommentsPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const data = (await this.loadData()) as Partial<PluginSettings> | null;
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, data);
   }
 
   async saveSettings(): Promise<void> {
@@ -561,7 +562,7 @@ function appendCommentIcon(afterEl: HTMLElement, c: TextComment): void {
   ) {
     return; // já existe (evita duplicar em reprocessamentos)
   }
-  const icon = document.createElement("span");
+  const icon = activeDocument.createElement("span");
   icon.className = "text-comment-widget" + (c.done ? " is-done" : "");
   icon.setAttribute("data-comment-id", c.id);
   icon.setAttribute("aria-label", c.body || "Comentário");
@@ -596,10 +597,10 @@ function wrapFirstOccurrence(
 
   // Coleta os nós de texto ainda não destacados, em ordem.
   const nodes: Text[] = [];
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const walker = activeDocument.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node: Node | null;
   while ((node = walker.nextNode())) {
-    if ((node.parentElement as HTMLElement | null)?.closest(".text-comment-highlight")) {
+    if (node.parentElement?.closest(".text-comment-highlight")) {
       continue;
     }
     nodes.push(node as Text);
@@ -632,10 +633,10 @@ function wrapFirstOccurrence(
   for (let i = segments.length - 1; i >= 0; i--) {
     const s = segments[i];
     try {
-      const range = document.createRange();
+      const range = activeDocument.createRange();
       range.setStart(s.node, s.start);
       range.setEnd(s.node, s.end);
-      const span = document.createElement("span");
+      const span = activeDocument.createElement("span");
       span.className = done
         ? "text-comment-highlight is-done"
         : "text-comment-highlight";
@@ -750,7 +751,6 @@ class TextCommentsSettingTab extends PluginSettingTab {
         slider
           .setLimits(8, 80, 4)
           .setValue(this.plugin.settings.contextLength)
-          .setDynamicTooltip()
           .onChange(async (value) => {
             this.plugin.settings.contextLength = value;
             await this.plugin.saveSettings();
@@ -772,7 +772,7 @@ class TextCommentsSettingTab extends PluginSettingTab {
           })
       );
 
-    containerEl.createEl("h3", { text: "Cores do realce" });
+    new Setting(containerEl).setName("Cores do realce").setHeading();
 
     this.colorSetting(
       containerEl,

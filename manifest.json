@@ -1,8 +1,8 @@
 {
   "id": "note-comments",
   "name": "Note Comments",
-  "version": "0.1.0",
-  "minAppVersion": "1.4.0",
+  "version": "0.1.1",
+  "minAppVersion": "1.7.2",
   "description": "Adicione comentários a trechos de texto com destaque colorido e um painel lateral. Os comentários ficam em notas separadas, linkadas ao documento.",
   "author": "R2 Security",
   "isDesktopOnly": false

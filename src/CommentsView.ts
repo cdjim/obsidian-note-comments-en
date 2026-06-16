@@ -125,9 +125,9 @@ export class CommentsView extends ItemView {
 
   /** Rola até o cartão de um comentário e o destaca brevemente. */
   focusComment(id: string): void {
-    const card = this.contentEl.querySelector(
+    const card = this.contentEl.querySelector<HTMLElement>(
       `.text-comment-card[data-comment-id="${id}"]`
-    ) as HTMLElement | null;
+    );
     if (!card) return;
     card.scrollIntoView({ behavior: "smooth", block: "center" });
     card.addClass("is-flash");
@@ -163,7 +163,7 @@ export class CommentsView extends ItemView {
     );
     doneBtn.onclick = (e) => {
       e.stopPropagation();
-      this.plugin.toggleDone(comment);
+      void this.plugin.toggleDone(comment);
     };
 
     const editBtn = actions.createEl("button", { cls: "clickable-icon" });
@@ -171,7 +171,7 @@ export class CommentsView extends ItemView {
     editBtn.setAttribute("aria-label", "Editar");
     editBtn.onclick = (e) => {
       e.stopPropagation();
-      this.plugin.editComment(comment);
+      void this.plugin.editComment(comment);
     };
 
     const delBtn = actions.createEl("button", { cls: "clickable-icon" });
@@ -179,7 +179,7 @@ export class CommentsView extends ItemView {
     delBtn.setAttribute("aria-label", "Excluir");
     delBtn.onclick = (e) => {
       e.stopPropagation();
-      this.plugin.deleteComment(comment);
+      void this.plugin.deleteComment(comment);
     };
 
     // Clicar no card leva ao trecho no editor.

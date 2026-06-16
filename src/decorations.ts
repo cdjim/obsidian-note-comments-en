@@ -28,7 +28,7 @@ class CommentWidget extends WidgetType {
   }
 
   toDOM(): HTMLElement {
-    const span = document.createElement("span");
+    const span = activeDocument.createElement("span");
     span.className =
       "text-comment-widget" + (this.done ? " is-done" : "");
     span.setAttribute("data-comment-id", this.id);

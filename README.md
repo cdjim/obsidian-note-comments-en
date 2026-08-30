@@ -1,3 +1,5 @@
+This is the English version of the plugin Note Comments developed by Rafael Santos.
+
 # Note Comments (English) — Obsidian plugin
 
 Adds anchored comments to any passage of text (a word, phrase, or paragraph),

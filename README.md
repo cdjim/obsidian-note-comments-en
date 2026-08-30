@@ -1,4 +1,4 @@
-# Note Comments — Obsidian plugin
+# Note Comments (English) — Obsidian plugin
 
 Adds anchored comments to any passage of text (a word, phrase, or paragraph),
 with **colored highlight + underline** tied to the theme, and a **side panel**
@@ -79,3 +79,9 @@ To test: copy `main.js`, `manifest.json`, and `styles.css` to
 - Relocation is by exact text; large rewrites of the passage create orphans.
 - One color per highlight is supported in the data model (`color`), but there is
   no UI to pick it yet.
+
+## Credits
+
+This is an English translation of [Note Comments](https://github.com/rafamss/obsidian-note-comments)
+by **Rafael Santos**, the original author. All credit for the plugin's design
+and logic goes to him.

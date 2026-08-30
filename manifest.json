@@ -1,9 +1,9 @@
 {
-  "id": "note-comments",
-  "name": "Note Comments",
-  "version": "0.1.2",
+  "id": "note-comments-en",
+  "name": "Note Comments (English)",
+  "version": "1.0.0",
   "minAppVersion": "1.7.2",
   "description": "Add comments to passages of text with colored highlighting and a side panel. Comments are stored in separate notes, linked to the document.",
-  "author": "Rafael Santos",
+  "author": "Jim Chen",
   "isDesktopOnly": false
 }

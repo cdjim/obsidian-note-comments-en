@@ -1,6 +1,6 @@
 {
-  "name": "obsidian-note-comments",
-  "version": "0.1.2",
+  "name": "obsidian-note-comments-en",
+  "version": "1.0.0",
   "description": "Anchored comments on passages of text, with highlighting and a side panel.",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
   },
   "keywords": ["obsidian", "plugin", "comments", "annotations"],
-  "author": "Rafael Santos",
+  "author": "Jim Chen",
   "license": "MIT",
   "devDependencies": {
     "@codemirror/state": "^6.4.1",
